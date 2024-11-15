@@ -8,7 +8,7 @@ let server: Server;
 async function bootstrap() {
  
     server = app.listen(PORT, () => {
-      console.log(`App is listening on port ${PORT}`);
+      console.log(`Server is listening on port ${PORT}`);
     })
   }
 

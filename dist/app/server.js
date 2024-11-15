@@ -18,7 +18,7 @@ let server;
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         server = app_1.default.listen(PORT, () => {
-            console.log(`App is listening on port ${PORT}`);
+            console.log(`Server is listening on port ${PORT}`);
         });
     });
 }
