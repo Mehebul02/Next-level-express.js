@@ -34,25 +34,37 @@ const logger = (req, res, next) => {
     console.log(req.url, req.method, req.hostname);
     next();
 };
-// app.get('/', logger, (req: Request, res: Response) => {
-//   res.send('I am serving a bdCalling It Ltd as a front end developer');
-// });
+// error handle
+app.get('/', (req, res, next) => {
+    try {
+        res.send(something);
+    }
+    catch (error) {
+        next(error);
+        // console.log(err);
+        // res.status(400).json({
+        //   success: false,
+        //   message: 'failed to get data'
+        // })
+    }
+});
 app.post('/', (req, res) => {
     console.log(req.body);
     res.json({
         message: 'Transfer data'
     });
 });
-app.get('/', (req, res) => {
-    try {
-        res.send(something);
-    }
-    catch (err) {
-        console.log(err);
-        res.status(400).json({
-            success: false,
-            message: 'failed to get data'
-        });
-    }
+app.all("*", (req, res) => {
+    res.status(400).json({
+        status: false,
+        message: "Route is Not Found"
+    });
+});
+// global error handling 
+app.use((error, req, res, next) => {
+    res.status(400).json({
+        success: false,
+        message: 'Something went wrong'
+    });
 });
 exports.default = app;
